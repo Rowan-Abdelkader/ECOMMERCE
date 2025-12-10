@@ -1,0 +1,17 @@
+"use server"
+
+import { getMyToken } from "@/utilities/token";
+import axios from "axios";
+
+export async function cashPaymentAction(id:string,Values:object){
+const token = await getMyToken();
+if (!token){
+throw new Error("Login First");
+} 
+const{data}=await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/${id}`,Values,{
+	headers:{
+		token: token as string
+	}
+})
+return data;
+}

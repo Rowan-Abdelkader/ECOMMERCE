@@ -12,7 +12,7 @@ const values = {
   };
   const { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/wishlist`, values, {
     headers: {
-      token: token
+      token: token as string
     }
   });
   return data;

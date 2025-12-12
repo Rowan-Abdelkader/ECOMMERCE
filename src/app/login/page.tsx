@@ -15,15 +15,16 @@ import { Button } from "@/_components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { toast } from "sonner";
-import { CheckCircle, Link, XCircle } from "lucide-react";
+import { CheckCircle, XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { LoginSchemaType } from "@/schema/login.schema";
 import { loginSchema } from "@/schema/login.schema";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 const Login = () => {
   const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const form = useForm<LoginSchemaType>({
@@ -38,13 +39,13 @@ const Login = () => {
 
   async function handleLogin(values: LoginSchemaType) {
     try {
-		 setIsLoading(true);
+      setIsLoading(true);
       const { data } = await axios.post(
         "https://ecommerce.routemisr.com/api/v1/auth/signin",
         values
       );
-	      console.log("Token:", data.token);
-    console.log("User ID:", data.user._id);
+      console.log("Token:", data.token);
+      console.log("User ID:", data.user._id);
 
       console.log(data);
       toast.success("Event has been created.", {
@@ -61,7 +62,7 @@ const Login = () => {
         duration: 4000,
       });
       console.log(error);
-	   setIsLoading(false);
+      setIsLoading(false);
     }
     const res = await signIn("credentials", {
       email: values.email,
@@ -76,14 +77,14 @@ const Login = () => {
         position: "top-center",
         icon: <CheckCircle className="text-green-500" />,
         duration: 2000,
-		
+
       });
 
- setTimeout(() => {
-    window.location.href = res.url || "/";
-  }, 2000);
+      setTimeout(() => {
+        window.location.href = res.url || "/";
+      }, 2000);
 
-} else {
+    } else {
       toast.error(res?.error, {
         position: "top-center",
         icon: <XCircle className="text-red-500" />,
@@ -130,16 +131,16 @@ const Login = () => {
           />
 
           <Button className="w-full" type="submit" disabled={isLoading}>
-				{isLoading  ? <i className='fa-solid fa-spinner fa-spin'></i> : " "}
+            {isLoading ? <i className='fa-solid fa-spinner fa-spin'></i> : " "}
 
             Login
           </Button>
-<a
-  href="/forgetPassword"
-  className="text-xl font-semibold text-black hover:text-green-600 transition-colors duration-300"
->
-  forget your password?
-</a>
+          <Link
+            href="/forgetPassword"
+            className="text-xl font-semibold text-black hover:text-green-600 transition-colors duration-300"
+          >
+            forget your password?
+          </Link>
         </form>
       </Form>
     </div>

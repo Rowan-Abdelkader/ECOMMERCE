@@ -8,7 +8,7 @@ export async function getMyToken(){
 	
 	const token= await decode({
 		token:x,
-		secret:process.env.NEXTAUTH_SECRET!
+		secret:process.env.AUTH_SECRET!
 	}) 
 	return token?.token
 }

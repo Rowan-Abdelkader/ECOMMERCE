@@ -15,7 +15,7 @@ export const authOptions: AuthOptions = {
       },
 
       authorize: async (credentials) => {
-        const response = await fetch(`${process.env.API}/auth/signin`, {
+        const response = await fetch(`${process.env.URL}/auth/signin`, {
           method: "POST",
           body: JSON.stringify({
             email: credentials?.email,
@@ -25,7 +25,6 @@ export const authOptions: AuthOptions = {
         });
 
         const payload = await response.json();
-        console.log("API respons", payload);
 
         if (payload.message === "success") {
           const { id } = jwtDecode(payload.token) as { id: string };

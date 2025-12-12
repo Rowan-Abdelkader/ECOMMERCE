@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import { RegisterFormValues } from "@/types/product.t";
 const Register = () => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<RegisterSchemaType>({
     defaultValues: {
@@ -38,12 +38,16 @@ const Register = () => {
 
   async function handleRegister(values: RegisterFormValues) {
     try {
-		  setIsLoading(true);
-      const { data } = await axios.post(
-        "https://ecommerce.routemisr.com/api/v1/auth/signup",
-        values
-      );
-      console.log(data);
+      setIsLoading(true);
+      const res = await fetch("https://ecommerce.routemisr.com/api/v1/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+      })
+      const data = await res.json();
+
       toast.success("Event has been created.", {
         position: "top-center",
         icon: <CheckCircle className="text-green-500" />,
@@ -56,8 +60,7 @@ const Register = () => {
         icon: <XCircle className="text-red-500" />,
         duration: 4000,
       });
-      console.log(error);
-	   setIsLoading(false);
+      setIsLoading(false);
     }
   }
 

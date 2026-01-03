@@ -5,7 +5,8 @@ import axios from "axios"
 export async function getUserOrder () {
 
 	const token = await getMyToken()
-	const{id} = jwtDecode(token)
+const { id } = jwtDecode(token) as { id: string };
+
 	if (!token){
 		throw new Error ("Login First")
 	}

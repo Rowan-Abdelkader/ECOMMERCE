@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import { getMyToken } from "@/utilities/token";
 import axios from "axios";
 
@@ -7,13 +7,17 @@ export async function addProductToWishlist(productId: string) {
   if (!token) {
     throw new Error("Unauthorized");
   }
-const values = {
+  const values = {
     productId: productId,
   };
-  const { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/wishlist`, values, {
-    headers: {
-      token: token as string
+  const { data } = await axios.post(
+    `https://ecommerce.routemisr.com/api/v1/wishlist`,
+    values,
+    {
+      headers: {
+        token: token as string,
+      },
     }
-  });
+  );
   return data;
 }

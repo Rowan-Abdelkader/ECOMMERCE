@@ -9,7 +9,7 @@ import { cartContext } from "@/Context/CartContext";
 const AddBtnCart = ({ id }: { id: string }) => {
 
   const [loading, setLoading] = useState(false);
-  const { addProductToCart } = useContext(cartContext)
+  
 
   async function handleAddToCart() {
     setLoading(true);
@@ -31,7 +31,7 @@ const AddBtnCart = ({ id }: { id: string }) => {
           icon: <CheckCircle className="text-red-500" />,
         });
       }
-    } catch (error) {
+    } catch {
 
       toast.error("Something went wrong!", {
         duration: 2000,
@@ -43,7 +43,7 @@ const AddBtnCart = ({ id }: { id: string }) => {
     }
   }
   return (
-    <div className='flex justify-center mt-4 w-[100%]'>
+    <div className='flex justify-center mt-4 w-full'>
       <Button
         className="w-[80%] bg-green-500 flex items-center justify-center gap-2"
         variant="default"

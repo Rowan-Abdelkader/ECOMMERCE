@@ -9,8 +9,7 @@ import { Badge } from "@/components/ui/badge";
 
 const Navbar = () => {
   const { data, status } = useSession();
-  const { numOfCartItems } = useContext(cartContext);
-
+const { numOfCartItems } = useContext(cartContext) as { numOfCartItems: number };
 
   console.log("Session status:", status);
   console.log("Session data:", data);

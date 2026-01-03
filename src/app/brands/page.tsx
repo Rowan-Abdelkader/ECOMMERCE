@@ -12,7 +12,7 @@ const Brands = async () => {
 		<h1 className="text-4xl font-semibold text-green-600 text-center mb-12">All Brands
 </h1>
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {brands.map((brand, idx) => (
+        {brands.map((brand , idx : number) => (
           <div key={idx} className="border rounded-sm shadow-sm flex flex-col transition-all duration-500 items-center hover:shadow-[0_0_10px_2px_rgba(50,197,94,0.4)]">
             <img
               src={brand.image}

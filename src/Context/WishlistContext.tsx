@@ -10,7 +10,7 @@ const WishlistProvider = ({ children }: { children: React.ReactNode }) => {
     const [loading, setLoading] = useState(true);
     const [DeleteId, setDeleteId] = useState("");
     const [AddId, setAddId] = useState("");
-    // ------------------------get data-------------------------------------
+ 
     async function getWishList() {
         try {
             const data = await getUserWishlist();
